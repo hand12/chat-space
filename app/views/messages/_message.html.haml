@@ -1,0 +1,8 @@
+%li.chat-message
+  .chat-message__header
+    %p.chat-message__name
+      やまぴー
+    %p.chat-message__time
+      = message.created_at.strftime("%m/%d %H:%M")
+  %p.chat-message__body
+    = message.body
