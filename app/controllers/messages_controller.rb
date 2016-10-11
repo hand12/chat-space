@@ -6,9 +6,7 @@ class MessagesController < ApplicationController
 
   def create
     message = Message.new(create_params)
-    if message.save
-      flash[:notice] = "送信完了しました。"
-    else
+    unless message.save
       flash[:notice] = "本文を入力してください。"
     end
   end
