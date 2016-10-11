@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
     if message.save
       flash[:notice] = "送信完了しました。"
     else
-      flash[:notice] = "送信できませんでした。しばらく時間を置いてからもう一度実行してください。"
+      flash[:notice] = "本文を入力してください。"
     end
   end
 
