@@ -75,9 +75,11 @@
     .chat-body{
       width: 80vw;
       margin-top: 146px;
+      margin-bottom: 240px;
       .chat-messages{
+        margin-top: 100px;
         color: #434A54;
-        
+
         .chat-message{
           padding-left: 40px;
           &__header{
@@ -97,6 +99,11 @@
             clear: both;
             font-size: 14px;
             margin-bottom: 40px;
+            padding: 10px;
+            width: 300px;
+            background-color: $green;
+            -webkit-border-radius: 5px;
+                    border-radius: 5px;
           }
         }
       }
@@ -112,18 +119,27 @@
         text-align: left;
       }
       &__textarea{
-        padding-left: 10px;
-        height: 50px;
+        line-height: 40px;
+        font-size: 16px;
+        padding: 5px 10px;
+        height: 40px;
         width: 50%;
         border: none;
+        float: left;
       }
       &__submit{
+        color: $white;
         height: 50px;
         width: 100px;
         background: $submit-blue;
         margin: 0 10px;
         border: none;
+        float: left;
       }
     }
   }
+}
+
+.chat-messages:last-child .chat-message__body{
+  margin-bottom: 100px;
 }
