@@ -1,5 +1,6 @@
 $main_color: #253141;
 $main_color_dark: darken($main_color, 5%);
+$main_color_little_bright: lighten($main_color, 30%);
 $main_color_bright: lighten($main_color, 70%);
 
 $white: #fff;
