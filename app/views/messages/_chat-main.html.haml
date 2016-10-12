@@ -2,13 +2,13 @@
   .chat-header
     .chat-header__left
       %h2
-        TECH::CAMP11th
+        = current_user.groups.first.name
       %p.chat-header__users
         Members:
-        %span.chat-header__user
-          = current_user.name
+        = render partial: 'member', collection: current_user.groups.first.users, as: "user"
     .chat-header__right
       .chat-header__edit-btn
+        = link_to "編集", edit_group_path(current_user.groups.first)
   .chat-body
     %ul.chat-messages
       = render partial: 'message', collection: @messages

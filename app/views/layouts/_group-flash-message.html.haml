@@ -1,0 +1,8 @@
+- flash.each do |key, value|
+  .chat-group-form__errors.clearfix
+    %h2 グループが作成されません。
+    %ul
+    - if value == notice
+      = content_tag(:li, value)
+    - if value == alert
+      = content_tag(:li, value)
