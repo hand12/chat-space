@@ -1,7 +1,7 @@
 .chat-side
   .chat-user
     %h5
-      やまぴー
+      = current_user.name
     .chat-user__actions
       = link_to "/", class: "chat-user__action" do
         %i.fa.fa-pencil-square-o
