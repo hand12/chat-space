@@ -4,12 +4,30 @@ class MessagesController < ApplicationController
   def index
     @message = Message.new
     @groups = current_user.groups
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
-    message = Message.new(create_params)
-    unless message.save
-      flash[:notice] = "本文を入力してください。"
+    @message = Message.new(create_params)
+    respond_to do |format|
+      if @message.save
+        format.html do
+          redirect_to :root
+        end
+        format.json
+      else
+        format.html do
+          flash[:notice] = "本文を入力して下さい。"
+          redirect_to :root
+        end
+        format.json do
+          flash[:notice] = "本文を入力して下さい。"
+          redirect_to :root
+        end
+      end
     end
   end
 
