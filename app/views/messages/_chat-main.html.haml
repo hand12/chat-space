@@ -13,8 +13,8 @@
     %ul.chat-messages
       = render partial: 'message', collection: @messages
   .chat-footer
-    = form_for @message, remote: true do |f|
+    = form_for @message do |f|
       .new_message
         .chat-footer__body
-          = f.text_area :body, class: "chat-footer__textarea"
-          = f.submit "送信", class: "chat-footer__submit"
+          = f.text_area :body, class: "chat-footer__textarea", id: "js-input"
+          = f.submit "送信", class: "chat-footer__submit", id: "js-submit"
