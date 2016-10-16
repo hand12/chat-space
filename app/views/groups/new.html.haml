@@ -9,11 +9,24 @@
         = f.text_field :name, placeholder: "グループ名を入力してください。", class: "chat-group-form__input"
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
-        = f.label :user, "チャットメンバーを追加", class: "chat-group-form__label"
+        %label.chat-group-form__label チャットメンバーを追加
       .chat-group-form__field--right
-        = f.collection_check_boxes(:user_ids, User.all, :id, :name) do |t|
-          .chat-group-form__check
-            = t.label { t.check_box + t.text }
+        .chat-group-form__search
+          %input#group_user_name.chat-group-form__input{placeholder: "チャットメンバーを入力して下さい。" }
+        #user-search-result
+    .chat-group-form__field.clearfix
+      .chat-group-form__field--left
+        = f.label :user, "チャットメンバー", class: "chat-group-form__label"
+      .chat-group-form__field--right
+        #chat-group-users
+          -# .chat-group-form-users
+          -#   .chat-group-user.clearfix
+          -#   = f.text_field :user_ids, placeholder: "チャットメンバーを入力して下さい。", class: "chat-group-form__input"
+          %p.chat-group-user__name
+      -# .chat-group-form__field--right
+      -#   = f.collection_check_boxes(:user_ids, User.all, :id, :name) do |t|
+      -#     .chat-group-form__check
+      -#       = t.label { t.check_box + t.text }
     .chat-group-form__field.clearfix
       .chat-group-form__field--right
-        = f.submit "作成する", class: "chat-group-form__action-btn"
+        = f.submit "作成する", class: "chat-group-form__action-btn", id: "js-group-submit"

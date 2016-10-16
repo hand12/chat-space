@@ -1,4 +1,11 @@
 class GroupsController < ApplicationController
+  def index
+    @users = User.all
+    respond_to do |format|
+      format.json
+    end
+  end
+
   def new
     @group = Group.new
     @group.users << current_user
