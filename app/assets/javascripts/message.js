@@ -1,19 +1,31 @@
 $(document).on('turbolinks:load', function(){
   function add_message_component(message){
+    var image_component =
+      '<img src="'                      +
+      message.image                     +
+      '">'
+    var body_component =
+      '<p class="chat-message__body">'    +
+      message.body                           +
+      '</p>'
+    if (message.image == null){
+      image_component = '';
+    } else {
+      body_component = '';
+    }
     var chat_message =
-    '<li class="chat-message">'         +
-    '<div class="chat-message__header">' +
-    '<p class="chat-message__name">'    +
-    message.name                           +
-    '</p>'                              +
-    '<p class="chat-message__time">'    +
-    message.time                 +
-    '</p>'                              +
-    '</div><br>'                            +
-    '<p class="chat-message__body">'    +
-    message.body                           +
-    '</p>'                              +
-    '</li>'
+      '<li class="chat-message">'          +
+      '<div class="chat-message__header">' +
+      '<p class="chat-message__name">'     +
+      message.name                         +
+      '</p>'                               +
+      '<p class="chat-message__time">'     +
+      message.time                         +
+      '</p>'                               +
+      '</div><br>'                         +
+      body_component                       +
+      image_component                      +
+      '</li>'
     $(".chat-messages").append(chat_message);
   }
 
@@ -46,23 +58,6 @@ $(document).on('turbolinks:load', function(){
     });
   }
 
-  // function getMessage(){
-  //   console.log("getMessageよばれた");
-  //   $.ajax({
-  //     url: "/messages.json",
-  //     type: 'GET',
-  //     dataType: 'json',
-  //     success: function(json){
-  //       var len = json.length;
-  //       for (var i = 0; i < len; i++){
-  //         add_message_component(json[i]);
-  //       }
-  //     },
-  //     error: function(){
-  //       console.log("通信失敗");
-  //     }
-  //   })
-  // };
   scroll();
 
   $("#message_image").on('change', function(){
