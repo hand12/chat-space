@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
   private
   def create_params
     params.require(:message).permit(
-      :body).merge(group_id: current_user.groups.first.id, user_id: current_user.id)
+      :body, :image).merge(group_id: current_user.groups.first.id, user_id: current_user.id)
   end
 
   def set_messages

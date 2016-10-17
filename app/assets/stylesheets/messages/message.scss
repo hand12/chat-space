@@ -117,6 +117,13 @@
       .chat-messages{
         margin-top: 100px;
         color: #434A54;
+        
+        img{
+          display: block;
+          margin: 20px;
+          -webkit-border-radius: 10px;
+                  border-radius: 10px;
+        }
 
         .chat-message{
           padding-left: 40px;
@@ -172,9 +179,19 @@
         height: 50px;
         width: 100px;
         background: $submit-blue;
-        margin: 0 10px;
+        // margin: 0 10px;
         border: none;
         float: left;
+      }
+      &__file{
+        // background-color: #FFF;
+        line-height: 50px;
+        font-size: 46px;
+        padding: 0 10px;
+        float: left;
+        input {
+          display: none;
+        }
       }
     }
   }
