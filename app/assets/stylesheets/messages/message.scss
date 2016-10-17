@@ -172,9 +172,19 @@
         height: 50px;
         width: 100px;
         background: $submit-blue;
-        margin: 0 10px;
+        // margin: 0 10px;
         border: none;
         float: left;
+      }
+      &__file{
+        // background-color: #FFF;
+        line-height: 50px;
+        font-size: 46px;
+        padding: 0 10px;
+        float: left;
+        input {
+          display: none;
+        }
       }
     }
   }

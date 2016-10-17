@@ -17,4 +17,7 @@
       .new_message
         .chat-footer__body
           = f.text_area :body, class: "chat-footer__textarea", id: "js-input"
-          = f.submit "送信", class: "chat-footer__submit", id: "js-submit"
+          %label.chat-footer__file
+            = f.file_field :image
+            %i.fa.fa-image
+        = f.submit "送信", class: "chat-footer__submit", id: "js-submit"
