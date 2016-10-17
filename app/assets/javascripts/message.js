@@ -23,6 +23,29 @@ $(document).on('turbolinks:load', function(){
     target.animate({scrollTop: $('.chat-body').height()}, 500);
   }
 
+  function postMessage(){
+    var fd = new FormData($("#new_message").get(0));
+    var input = $("#js-input").val();
+    console.log(fd);
+    console.log(input);
+    $.ajax({
+      url: '/messages.json',
+      type: 'POST',
+      data: fd,
+      processData: false,//これがtrueだと、urlの中に文字が入るparamsとして送ろうとしてエらる
+      contentType: false,//content-typeヘッダの値を、fomdataオブジェクトは自動で適切に変換してくれるから、こkではfalseにする。
+      dataType: 'json'
+    }).done(
+    function(data){
+      $("#new_message").get(0).reset();
+      add_message_component(data);
+      scroll();
+    }).fail(function(data){
+      $('#js-flash').fadeIn().delay(3000).fadeOut(500);
+      console.log("失敗");
+    });
+  }
+
   // function getMessage(){
   //   console.log("getMessageよばれた");
   //   $.ajax({
@@ -42,30 +65,24 @@ $(document).on('turbolinks:load', function(){
   // };
   scroll();
 
+  $("#message_image").on('change', function(){
+    postMessage();
+  })
+
   $('#js-submit').click(function(e){
     e.preventDefault();
     var input = $("#js-input").val();
-    $("#js-input").val('');
 
-    $.ajax({
-      url: '/messages.json',
-      type: 'POST',
-      data: {
-        "message": {"body": input},
-      },
-      dataType: 'json',
-      success: function(json){
-        $('#message_body').val('');
-        add_message_component(json);
-        scroll();
-      },
-      error: function(){
-        $('#js-flash').fadeIn().delay(3000).fadeOut(500);
-        console.log("失敗");
-      }
-    });
+    if(input === ''){
+      console.log("空です。本文を入力してください。");
+    } else {
+      console.log("送信");
+      postMessage();
+      $("#js-input").val('');
+    }
 
   });
+
 })
 
 

@@ -50,15 +50,14 @@ $(document).on('turbolinks:load', function(){
       url: "/users.json",
       method: "GET",
       dataType: "json",
-      data: {user_name: input},
-      success: function(json){
-        // $("#group_user_name").val('');
-        searchUser(json);
-        get_user_id();
-      },
-      error: function(json){
-        console.log("失敗");
-      }
+      data: {user_name: input}
+    }).done(
+    function(data){
+      searchUser(data);
+      get_user_id();
+    }).fail(
+    function(data){
+      console.log("失敗");
     })
   }
 
@@ -100,10 +99,10 @@ $(document).on('turbolinks:load', function(){
     '<div class="chat-group-user clearfix">'                +
     '<input name="chat-group[user_ids][]" type="hidden"'    +
     'value='                                                +
-    id                                                 +
+    id                                                      +
     '>'                                                     +
     '<p class="chat-group-user__name">'                     +
-    name                                               +
+    name                                                    +
     '</p></div>'
     $("#chat-group-users").append(user_component);
   }
