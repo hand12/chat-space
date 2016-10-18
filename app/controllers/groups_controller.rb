@@ -15,14 +15,20 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+  def show
+    @groups = current_user.groups.eager_load(:users).sort{|b,a| a.newest_message_time.to_s <=> b.newest_message_time.to_s}
+    @group = Group.eager_load(:users, :messages).find(params[:id])
+    @message = Message.new
+  end
+
   def update
     group = Group.find(params[:id])
     if group.update(group_params)
       flash[:notice] = "グループを更新しました。"
-      redirect_to :root
+      redirect_to group
     else
       flash[:notice] = "タイトルを入力してください。"
-      redirect_to :back
+      redirect_to action: 'new'
     end
   end
 
@@ -30,10 +36,10 @@ class GroupsController < ApplicationController
     group = Group.create(group_params)
     if group.save
       flash[:notice] = "グループが作成されました。"
-      redirect_to :root
+      redirect_to group
     else
       flash[:notice] = "タイトルを入力して下さい。"
-      redirect_to :back
+      redirect_to action: 'new'
     end
   end
 

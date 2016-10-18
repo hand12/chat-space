@@ -1,0 +1,3 @@
+.chat
+  = render partial: 'messages/chat-side', locals: {groups: @groups}
+  = render partial: 'messages/chat-main', locals: {group: @group, message: @message}
