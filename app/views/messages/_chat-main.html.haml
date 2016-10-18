@@ -11,7 +11,7 @@
         = link_to "編集", edit_group_path(current_user.groups.first)
   .chat-body
     %ul.chat-messages
-      = render partial: 'message', collection: @messages
+      -# = render partial: 'message', collection: @messages
   .chat-footer
     = form_for @message do |f|
       .new_message
