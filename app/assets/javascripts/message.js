@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function(){
+  var messageNum = 0;
   function add_message_component(message){
     var image_component =
       '<img src="'                      +
@@ -27,6 +28,7 @@ $(document).on('turbolinks:load', function(){
       image_component                      +
       '</li>'
     $(".chat-messages").append(chat_message);
+    scroll();
   }
 
   function scroll(){
@@ -38,8 +40,6 @@ $(document).on('turbolinks:load', function(){
   function postMessage(){
     var fd = new FormData($("#new_message").get(0));
     var input = $("#js-input").val();
-    console.log(fd);
-    console.log(input);
     $.ajax({
       url: '/messages.json',
       type: 'POST',
@@ -51,14 +51,48 @@ $(document).on('turbolinks:load', function(){
     function(data){
       $("#new_message").get(0).reset();
       add_message_component(data);
-      scroll();
     }).fail(function(data){
       $('#js-flash').fadeIn().delay(3000).fadeOut(500);
       console.log("失敗");
     });
   }
 
+  function getMessage(messageNum){
+    console.log("getMessageよばれた");
+
+    $.ajax({
+      url: "/messages.json",
+      type: 'GET',
+      dataType: 'json'
+    }).done(
+    function(data){
+      len = data.length;
+      if (len == messageNum){
+        console.log("変化なし");
+      } else {
+        for (var i = messageNum; i < len; i++){
+          add_message_component(data[i]);
+        }
+        messageNum = len;
+        return messageNum;
+      }
+    }).fail(
+    function(date){
+      console.log("通信失敗");
+    })
+
+  }
+
+  function autoReload(){
+    console.log("autoReload呼ばれた");
+    getMessage(messageNum);
+    // setInterval(getMessage(messageNum), 1000);
+  }
+
+  messageNum = getMessage(messageNum);
   scroll();
+  setInterval(autoReload, 1000 * 10);
+
 
   $("#message_image").on('change', function(){
     postMessage();
@@ -77,6 +111,7 @@ $(document).on('turbolinks:load', function(){
     }
 
   });
+
 
 })
 
