@@ -1,5 +1,6 @@
-%li.chat-group
-  %p.chat-group__name
-    = group.name
-  %p.chat-group__message
-    まだメッセージはありません。
+= link_to group_path(group) do
+  %li.chat-group
+    %p.chat-group__name
+      = group.name
+    %p.chat-group__message
+      = group.newest_message

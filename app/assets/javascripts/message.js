@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function(){
     var image_component =
       '<img src="'                      +
       message.image                     +
-      '">'
+      '" width="500">'
     var body_component =
       '<p class="chat-message__body">'    +
       message.body                           +
@@ -28,7 +28,6 @@ $(document).on('turbolinks:load', function(){
       image_component                      +
       '</li>'
     $(".chat-messages").append(chat_message);
-    scroll();
   }
 
   function scroll(){
@@ -51,6 +50,7 @@ $(document).on('turbolinks:load', function(){
     function(data){
       $("#new_message").get(0).reset();
       add_message_component(data);
+      scroll();
     }).fail(function(data){
       $('#js-flash').fadeIn().delay(3000).fadeOut(500);
       console.log("失敗");
@@ -59,11 +59,14 @@ $(document).on('turbolinks:load', function(){
 
   function getMessage(messageNum){
     console.log("getMessageよばれた");
+    var url = location.href.split("/");
+    var id = url[url.length -  1];
 
     $.ajax({
       url: "/messages.json",
       type: 'GET',
-      dataType: 'json'
+      dataType: 'json',
+      data: {id: id}
     }).done(
     function(data){
       len = data.length;
@@ -86,6 +89,7 @@ $(document).on('turbolinks:load', function(){
   function autoReload(){
     console.log("autoReload呼ばれた");
     getMessage(messageNum);
+    scroll();
     // setInterval(getMessage(messageNum), 1000);
   }
 

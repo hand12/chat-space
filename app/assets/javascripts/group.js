@@ -91,6 +91,7 @@ $(document).on('turbolinks:load', function(){
       var name = $(this).data("user-name");
       user_ids.push(id);
       add_user_component(id, name);
+      remove_user_id();
     })
   }
 
@@ -103,9 +104,24 @@ $(document).on('turbolinks:load', function(){
     '>'                                                     +
     '<p class="chat-group-user__name">'                     +
     name                                                    +
-    '</p></div>'
+    '</p>'                                                  +
+    '<a class="user-search-remove chat-group-user__btn chat-group-user__btn--remove" data-user-id='          +
+    id                                                      +
+    '>削除</a>'
     $("#chat-group-users").append(user_component);
   }
 
+  function remove_user_id(){
+    $(".user-search-remove").click(function(e){
+      e.preventDefault();
+      var id = $(this).data("user-id");
+      $(this).parent(".chat-group-user").remove();
+      for(i = 0; i < user_ids.length; i++){
+        if(user_ids[i] == id){
+          user_ids.splice(i,1);
+        }
+      }
+    })
+  }
   incremental();
 })

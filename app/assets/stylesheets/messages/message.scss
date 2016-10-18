@@ -48,14 +48,17 @@
       color: $white;
       height: 80vh;
       .chat-group{
+        color: $white;
         padding: 20px 0;
         &__name{
           padding: 0 20px 5px;
           font-size: 15px;
+          text-decoration: underline;
         }
         &__message{
           padding: 0 20px;
           font-size: 11px;
+          text-decoration: underline;
         }
         &:hover {
           background-color: $main_color_little_bright;

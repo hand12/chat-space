@@ -2,21 +2,22 @@
   .chat-header
     .chat-header__left
       %h2
-        = current_user.groups.first.name
+        = group.name
       %p.chat-header__users
         Members:
-        = render partial: 'member', collection: current_user.groups.first.users, as: "user"
+        = render partial: 'messages/member', collection: group.users, as: "user"
     .chat-header__right
       .chat-header__edit-btn
-        = link_to "編集", edit_group_path(current_user.groups.first)
+        = link_to "編集", edit_group_path(group)
   .chat-body
     %ul.chat-messages
       -# = render partial: 'message', collection: @messages
   .chat-footer
-    = form_for @message do |f|
+    = form_for message do |f|
       .new_message
         .chat-footer__body
           = f.text_area :body, class: "chat-footer__textarea", id: "js-input"
+          = f.hidden_field :group_id, value: group.id
           %label.chat-footer__file
             = f.file_field :image
             %i.fa.fa-image
